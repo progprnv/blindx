@@ -91,7 +91,7 @@ func main() {
  / _  |   / /   / /   / _ \\  / _  /  _>  <   
 /____/   /_/   /_/   /_//_/  \\,_/  /_/|_|      
                                             
-      BlindX by progprnv
+     ----- blindx V1.0 by progprnv | pr0gx | Pranav Jayan 
 `)
 
 	// 1) Paste raw POST call
