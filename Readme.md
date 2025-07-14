@@ -1,4 +1,4 @@
-# 🕶️ BlindX
+# BlindX
 
 ```
    ___      __    _               __   _  __  
@@ -8,7 +8,6 @@
 
       BlindX v1.0 by progprnv
 ```
-# BlindX
 
 **BlindX** is a command-line tool for automated Blind XSS testing. Written in **Python**, it takes a raw HTTP POST request (e.g., copied from Burp Suite), injects your payload into specified parameters or headers, applies various encodings, and reports HTTP responses for each test.
 
