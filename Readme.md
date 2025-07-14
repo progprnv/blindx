@@ -70,7 +70,7 @@ flowchart TD
     J --> K[Prompt: Enter XSS payload]
     K --> L[Prompt: Select encoding option]
     L --> M{Option selected}
-    M -->|1–15| N[Apply selected encoding ×n]
+    M -->|1-15| N[Apply selected encoding times n]
     M -->|16| O[Generate all 15 encoding variants]
     M -->|17| P[Use original payload]
 
@@ -89,10 +89,10 @@ flowchart TD
     V --> W[For each payload variant]
     W --> X[Clone original HTTP Request]
     X --> Y[Inject payload into each parameter]
-    Y --> Z[Replace or add headers (with payload placeholders)]
+    Y --> Z[Replace or add headers with payload placeholders]
     Z --> AA[Send HTTP request]
     AA --> AB[Receive HTTP response]
-    AB --> AC[Log: Request URL + Status Code]
+    AB --> AC[Log: Request URL and Status Code]
     AC --> AD{More variants?}
     AD -->|Yes| W
     AD -->|No| AE[All tests complete]
