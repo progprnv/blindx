@@ -10,7 +10,6 @@
 Use **only** on targets for which you have **explicit permission** to test. Unauthorized testing may be illegal and unethical.
 
 ---
----
 
 ## \$1
 
