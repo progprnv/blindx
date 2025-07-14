@@ -10,43 +10,6 @@
 Use **only** on targets for which you have **explicit permission** to test. Unauthorized testing may be illegal and unethical.
 
 ---
-
-## ⚙️ Features
-
-* **Raw Request Parsing**: Accepts full HTTP POST requests (headers + body).
-* **Parameterized Injection**: Inject into one or more body parameters.
-* **Header Injection**: Add or replace headers with payload placeholders.
-* **Multiple Encodings**: Choose from 15 single/double/triple encodings (HTML, URL, JS, Unicode, Base64), all together, or none.
-* **Batch Execution**: Sends all variants and displays URL + HTTP status code.
-
----
-
-## 📥 Installation
-
-1. **Prerequisites**
-
-   * Go 1.18 or later
-
-2. **Clone repository**
-
-   ```bash
-   git clone https://github.com/yourusername/blindx.git
-   cd blindx
-   ```
-
-3. **Initialize modules**
-
-   ```bash
-   go mod init blindx
-   go mod tidy
-   ```
-
-4. **Build**
-
-   ```bash
-   go build -o blindx main.go
-   ```
-
 ---
 
 ## \$1
@@ -99,6 +62,46 @@ flowchart TD
     AD -->|No| AE[All tests complete]
     AE --> AF[Exit]
 ```
+
+
+
+
+## ⚙️ Features
+
+* **Raw Request Parsing**: Accepts full HTTP POST requests (headers + body).
+* **Parameterized Injection**: Inject into one or more body parameters.
+* **Header Injection**: Add or replace headers with payload placeholders.
+* **Multiple Encodings**: Choose from 15 single/double/triple encodings (HTML, URL, JS, Unicode, Base64), all together, or none.
+* **Batch Execution**: Sends all variants and displays URL + HTTP status code.
+
+---
+
+## 📥 Installation
+
+1. **Prerequisites**
+
+   * Go 1.18 or later
+
+2. **Clone repository**
+
+   ```bash
+   git clone https://github.com/yourusername/blindx.git
+   cd blindx
+   ```
+
+3. **Initialize modules**
+
+   ```bash
+   go mod init blindx
+   go mod tidy
+   ```
+
+4. **Build**
+
+   ```bash
+   go build -o blindx main.go
+   ```
+
 
 ---
 
