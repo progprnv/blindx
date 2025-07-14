@@ -17,7 +17,7 @@
 This tool is intended strictly for educational and authorized security testing purposes only. You must have explicit written permission from the system owner before conducting any tests using this tool. Unauthorized testing, especially on public domains or systems you do not own, may be illegal, unethical, and could result in criminal prosecution.
 
 If you're using this tool on bug bounty programs, always carefully review the program's scope and rules. Some platforms strictly exclude endpoints like contact forms, feedback pages, or other blind input channels, and exploiting them may lead to disqualification, negative reputation points, or even permanent bans.
-🛑 The developer of this tool takes no responsibility for any misuse or illegal activity. Use wisely, stay ethical, and always test responsibly.
+#### 🛑 The developer of this tool takes no responsibility for any misuse or illegal activity. Use wisely, stay ethical, and always test responsibly.
 
 ---
 
