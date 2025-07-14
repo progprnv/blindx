@@ -1,12 +1,5 @@
 # BlindX
 
-   ___      __    _               __   _  __  
-  / _ )    / /   (_)   ___    ___/ /  | |/_/  
- / _  |   / /   / /   / _ \  / _  /  _>  <   
-/____/   /_/   /_/   /_//_/  \_,_/  /_/|_|      
-
-      BlindX by progprnv
-
 
 **BlindX** is a command-line tool for automated Blind XSS testing. Written in Go, it takes a raw HTTP POST request (e.g., copied from Burp Suite), injects your payload into specified parameters or headers, applies various encodings, and reports HTTP responses for each test.
 
