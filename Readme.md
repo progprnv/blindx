@@ -8,127 +8,112 @@
 
       BlindX v1.0 by progprnv
 ```
+# BlindX
 
-**BlindX** is a Python command-line tool for **automated Blind XSS testing**.  
-It accepts raw HTTP POST requests (like those from Burp Suite), injects payloads into user-defined parameters and headers, applies various encodings, and logs the HTTP responses.
-
----
-
-## 🚨 Warning
-
-> ❗ Use this tool **only on systems you have explicit permission to test**. Unauthorized use may violate laws and ethical guidelines.
+**BlindX** is a command-line tool for automated Blind XSS testing. Written in **Python**, it takes a raw HTTP POST request (e.g., copied from Burp Suite), injects your payload into specified parameters or headers, applies various encodings, and reports HTTP responses for each test.
 
 ---
 
-## 🛠️ Features
+## 🚧 Warning
 
-- **Raw Request Parsing**: Accepts full POST requests (headers + body).
-- **Multiple Parameter Support**: Inject into one or more body parameters.
-- **Header Injection**: Add or replace headers dynamically.
-- **17 Encoding Options**:
-  - HTML, URL, JavaScript, Unicode, Base64 — single/double/triple
-  - All variants at once
-  - No encoding (raw payload)
-- **Batch Testing**: Sends encoded variants one by one, and logs status codes.
-- **ASCII Art Banner** 😎
+Use **only** on targets for which you have **explicit permission** to test. Unauthorized testing may be illegal and unethical.
+
+---
+
+## 🛠️ Detailed Workflow
+
+```mermaid
+flowchart TD
+    A[Start]
+    A --> B[Prompt: Paste raw HTTP POST request]
+    B --> C[Parse raw text into HTTP Request object]
+    C --> D{Parse Success?}
+    D -->|No| E[Error: Show parse error & exit]
+    D -->|Yes| F[Extract headers & body parameters]
+
+    F --> G[Prompt: Enter first parameter to inject]
+    G --> H{More parameters?}
+    H -->|Yes| I[Prompt: Enter next parameter]
+    I --> H
+    H -->|No| J[Collect all parameters]
+
+    J --> K[Prompt: Enter XSS payload]
+    K --> L[Prompt: Select encoding option]
+    L --> M{Option selected}
+    M -->|1-15| N[Apply selected encoding times n]
+    M -->|16| O[Generate all 15 encoding variants]
+    M -->|17| P[Use original payload]
+
+    P --> Q[Payload variant list prepared]
+    N --> Q
+    O --> Q
+
+    Q --> R[Prompt: Additional header injection?]
+    R -->|Yes| S[Prompt: Enter header name & value]
+    S --> T{More headers?}
+    T -->|Yes| S
+    T -->|No| U[Headers list prepared]
+    R -->|No| U
+
+    U --> V[Initialize HTTP Client]
+    V --> W[For each payload variant]
+    W --> X[Clone original HTTP Request]
+    X --> Y[Inject payload into each parameter]
+    Y --> Z[Replace or add headers with payload placeholders]
+    Z --> AA[Send HTTP request]
+    AA --> AB[Receive HTTP response]
+    AB --> AC[Log: Request URL and Status Code]
+    AC --> AD{More variants?}
+    AD -->|Yes| W
+    AD -->|No| AE[All tests complete]
+    AE --> AF[Exit]
+```
+
+---
+
+## ⚙️ Features
+
+* **Raw Request Parsing**: Accepts full HTTP POST requests (headers + body).
+* **Parameterized Injection**: Inject into one or more body parameters.
+* **Header Injection**: Add or replace headers with payload placeholders.
+* **Multiple Encodings**: Choose from 15 single/double/triple encodings (HTML, URL, JS, Unicode, Base64), all together, or none.
+* **Batch Execution**: Sends all variants and displays URL + HTTP status code.
 
 ---
 
 ## 📥 Installation
 
-### ✅ Option 1: via `pipx`
+1. **Install via pipx** (recommended)
 
-```bash
-pip install pipx
-pipx install blindx
-```
+   ```bash
+   pipx install blindx
+   ```
 
-### ✅ Option 2: via GitHub
+   Or via pip:
 
-```bash
-git clone https://github.com/progprnv/blindx
-cd blindx
-pip install .
-```
+   ```bash
+   pip install blindx
+   ```
 
----
+2. **Run it**:
 
-## 📋 Encoding Menu
-
-| Option | Type             | Repeats | Sample                    |
-|--------|------------------|---------|---------------------------|
-| 1–3    | HTML Encode      | ×1–×3   | `&lt;`, `&amp;`, `&quot;` |
-| 4–6    | URL Encode       | ×1–×3   | `%3C`, `%3E`, `%22`       |
-| 7–9    | JavaScript Escape| ×1–×3   | `\'`, `\"`, `\\`          |
-| 10–12  | Unicode Escape   | ×1–×3   | `\u003C`, `\u003E`        |
-| 13–15  | Base64 Encode    | ×1–×3   | `PHNjcmlwdD4=`, etc.      |
-| 16     | All Encodings    | 15x     | Every above combination   |
-| 17     | No Encoding      | —       | Just your original input  |
+   ```bash
+   blindx
+   ```
 
 ---
 
-## 🧪 Usage Example
+## 📋 Encoding Details
 
-```bash
-blindx
-```
-
-And follow the prompts:
-- Paste raw POST request
-- Choose parameter(s) to inject
-- Input payload
-- Select encoding
-- Optional header injection
-- Tool sends requests and logs results
-
----
-
-## 🧭 Workflow
-
-```mermaid
-flowchart TD
-    A[Start]
-    A --> B[Paste raw HTTP POST request]
-    B --> C[Parse HTTP request]
-    C --> D{Success?}
-    D -->|No| E[Exit with Error]
-    D -->|Yes| F[Extract Headers & Body Params]
-
-    F --> G[Prompt: First parameter to inject]
-    G --> H{More parameters?}
-    H -->|Yes| I[Prompt: Next parameter]
-    I --> H
-    H -->|No| J[Confirm all parameters]
-
-    J --> K[Prompt: Enter payload]
-    K --> L[Prompt: Select encoding option]
-    L --> M{Encoding Choice}
-    M -->|1–15| N[Apply Encoding ×n]
-    M -->|16| O[Generate All Encoded Payloads]
-    M -->|17| P[Use Raw Payload]
-    N --> Q[Payload Variants Prepared]
-    O --> Q
-    P --> Q
-
-    Q --> R{Inject into Header?}
-    R -->|Yes| S[Prompt for Header & Value]
-    S --> T{More Headers?}
-    T -->|Yes| S
-    T -->|No| U[Header Map Finalized]
-    R -->|No| U
-
-    U --> V[Initialize HTTP Client]
-    V --> W[Loop Payload Variants]
-    W --> X[Clone Original Request]
-    X --> Y[Inject Payload into Params]
-    Y --> Z[Inject/Replace Headers]
-    Z --> AA[Send Request]
-    AA --> AB[Receive Response]
-    AB --> AC[Log Status & URL]
-    AC --> AD{More Variants?}
-    AD -->|Yes| W
-    AD -->|No| AE[Done!]
-```
+| Option | Encoding Type     | Variations | Description                 |
+| ------ | ----------------- | ---------- | --------------------------- |
+| 1–3    | HTML Escape       | ×1, ×2, ×3 | `&lt;` / `&gt;` / etc.      |
+| 4–6    | URL Encode        | ×1, ×2, ×3 | `%3C` / `%3E` / etc.        |
+| 7–9    | JavaScript Escape | ×1, ×2, ×3 | `\'` / `\"` / `\\` escapes  |
+| 10–12  | Unicode Escape    | ×1, ×2, ×3 | `\u003C` / `\u003E` / etc.  |
+| 13–15  | Base64 Encode     | ×1, ×2, ×3 | `PHNjcmlwdD4=` etc.         |
+| 16     | All Variants      | 15 total   | Runs all above in sequence  |
+| 17     | None              | —          | Original payload unmodified |
 
 ---
 
@@ -138,4 +123,4 @@ This project is released under the **MIT License**.
 
 ---
 
-**Built with ❤️ by [progprnv](https://github.com/progprnv)**
+*Developed by Prog & Contributors*
