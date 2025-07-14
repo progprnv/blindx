@@ -53,8 +53,9 @@ Use **only** on targets for which you have **explicit permission** to test. Unau
 ## 🛠️ Detailed Workflow
 
 ```mermaid
-flowchart LR
-    A[Start] --> B[Prompt: Paste raw HTTP POST request]
+flowchart TD
+    A[Start]
+    A --> B[Prompt: Paste raw HTTP POST request]
     B --> C[Parse raw text into HTTP Request object]
     C --> D{Parse Success?}
     D -->|No| E[Error: Show parse error & exit]
