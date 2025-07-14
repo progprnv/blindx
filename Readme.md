@@ -11,7 +11,6 @@ Use **only** on targets for which you have **explicit permission** to test. Unau
 
 ---
 
-## \$1
 
 ## 🛠️ Detailed Workflow
 
