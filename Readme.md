@@ -1,4 +1,4 @@
-# BlindX
+# BlindX - Automated Blind-XSS Testing Toolkit 
 
 ```
    ___      __    _               __   _  __  
